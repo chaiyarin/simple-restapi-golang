@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 )
 
 type addressBook struct {
@@ -29,7 +30,15 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 func handleRequest() {
 	http.HandleFunc("/", homePage)
 	http.HandleFunc("/getAddress", getAddressBookAll)
-	http.ListenAndServe(":80", nil)
+	http.ListenAndServe(getPort(), nil)
+}
+func getPort() string {
+	var port = os.Getenv("PORT")
+	if port == "" {
+		port = "4747"
+		fmt.Println("INFO: No PORT environment variable detected, defaulting to " + port)
+	}
+	return ":" + port
 }
 func main() {
 	handleRequest() // ต้องนำ handleRequest มาใส่ใน main ด้วยนะครับ
