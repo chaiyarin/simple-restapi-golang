@@ -29,7 +29,7 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 func handleRequest() {
 	http.HandleFunc("/", homePage)
 	http.HandleFunc("/getAddress", getAddressBookAll)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":80", nil)
 }
 func main() {
 	handleRequest() // ต้องนำ handleRequest มาใส่ใน main ด้วยนะครับ
